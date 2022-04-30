@@ -4,6 +4,8 @@ import { login, logout } from './utils'
 import './global.css'
 import hero from './assets/pet.png'
 import Header from './Components/Header'
+import Adoptions from './Components/Adoptions'
+import Adopt from './Components/Adopt'
 
 export default function App() {
 
@@ -24,8 +26,8 @@ export default function App() {
         <img src={hero} alt="hero" />
       </div>
      </div>
-      {/* <Projects />
-      <Create /> */}
+      <Adoptions />
+      <Adopt />
      <footer>
        <p>Created with ❤️ by <a href="https://www.twitter.com/tjelailah">@tjelailah</a>.</p>
      </footer>

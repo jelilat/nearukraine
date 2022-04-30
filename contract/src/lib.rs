@@ -16,6 +16,8 @@ use near_sdk::collections::LazyOption;
 near_sdk::setup_alloc!();  
 
 pub const ONE_NEAR: u128 = 1_000_000_000_000_000_000_000_000 as u128;
+pub const MAX_CAT_WEIGHT: u128 = 50 as u128;
+pub const MAX_DOG_WEIGHT: u128 = 100 as u128;
 
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
@@ -96,12 +98,18 @@ impl Contract {
         let adoption: Adoption = self.adoptions.get(token_id as usize).unwrap().clone();
 
         let parent = adoption.parent;
-        if parent != env::signer_account_id() {
-            panic!("Only parent can claim NFT");
-        }
+        assert!(parent == env::signer_account_id(), "Only parent can claim NFT");
+
+        assert!(adoption.minted_nft == false, "NFT already claimed");
 
         let timedifference = (env::block_timestamp() - adoption.last_time_fed) / (86_400 as u64);
-        let weight = adoption.total_times_fed/(timedifference as u128);
+        let mut weight = adoption.total_times_fed/(timedifference as u128);
+        if weight > MAX_CAT_WEIGHT && adoption.animal == "cat" {
+            weight = MAX_CAT_WEIGHT;
+        } else if weight > MAX_DOG_WEIGHT && adoption.animal == "dog" {
+            weight = MAX_DOG_WEIGHT;
+        }
+
         let mut new_weight = weight.to_string() + " pounds";
         new_weight.push_str(&adoption.animal.clone());
 
