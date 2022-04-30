@@ -1,0 +1,24 @@
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: white;
+}
+
+img {
+    width: 50px;
+    margin: 10px;
+}
+
+.login {
+    float: right;
+    border: none;
+    margin: 20px;
+    font-size: 0.8em;
+    cursor: pointer;
+    background-color: #1e8bb8;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+}
