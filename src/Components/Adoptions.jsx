@@ -6,6 +6,8 @@ import './Adoptions.css'
 const BN = require("bn.js")
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import Cat from '../assets/cat.png';
+import Dog from '../assets/dog.png';
 
 function Adoptions() {
     const [adoptions, setAdoptions] = useState([]);
@@ -41,6 +43,18 @@ function Adoptions() {
         }
       };
 
+      const imageSize = (lastTimeFed, noOfTimesFed) => {
+        const timeDifference = Date.now() - (lastTimeFed/1000000)
+        const day = (timeDifference/1000)/86400
+        const weight = 10 * noOfTimesFed/day
+        console.log(weight)
+        if (weight > 300) {
+            return 300
+        } else {
+            return Math.floor(weight)
+        }
+    }
+
     return (
         <div>
             <div className="userAdoptions">
@@ -50,6 +64,9 @@ function Adoptions() {
                 {adoptions.map((adoption, index) => {
                     return (
                         <div className="alluserAdoption" key={index}>
+                            <div className="image">
+                                <img style={{width: imageSize(adoption.last_time_fed, adoption.total_times_fed)}} src={adoption.animal == "cat" ? Cat : Dog} alt=""/>
+                            </div>
                             <h3>{adoption.name}</h3>
                             <p>Type: {adoption.animal}</p>
                             <p>Parent: {adoption.parent}</p>

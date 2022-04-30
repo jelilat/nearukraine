@@ -27,12 +27,19 @@
     cursor: pointer;
 }
 
+.image {
+    width: 300px;
+    height: 250px;
+    white-space: nowrap;
+    text-align: center;
+}
+
 .alluserAdoption {
     background-color: white;
     margin: 30px;
     width: 350px;
     padding: 20px;
-    height: 400px;
+    height: 450px;
     border-radius: 10px;
 }
 
@@ -68,6 +75,8 @@ select {
 
 p {
     font-size: 0.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 768px) {

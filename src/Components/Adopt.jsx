@@ -9,6 +9,9 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css'
 import { BallTriangle } from 'react-loader-spinner';
 import { timeAgo } from '../Utils/Dateconverter';
+import ImageHelper from '../Utils/Image';
+import Cat from '../assets/cat.png';
+import Dog from '../assets/dog.png';
 
 export default function Adopt() {
     const client = create({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
@@ -77,12 +80,42 @@ export default function Adopt() {
         console.log(id)
 
         await window.contract.feed_pet({
-            id: id - 1,
+            id: id,
         },
         300000000000000, //gas estimate
         ONE_NEAR, //adoption fee
         )
         
+    }
+
+    const mint_nft = async (id) => {
+        setLoading(true);
+        if (!window.walletConnection.isSignedIn()) {
+            alert('You must be signed in to create a campaign');
+            return;
+        }
+        console.log(id)
+
+        await window.contract.nft_mint({
+            token_id: id,
+            receiver_id: window.accountId,
+        },
+        300000000000000, //gas estimate
+        new BN("100000000000000000000000"), //storage fee
+        )
+        setLoading(false);
+    }
+
+    const imageSize = (lastTimeFed, noOfTimesFed) => {
+        const timeDifference = Date.now() - (lastTimeFed/1000000)
+        const day = (timeDifference/1000)/86400
+        const weight = 10 * noOfTimesFed/day
+        console.log(weight)
+        if (weight > 300) {
+            return 300
+        } else {
+            return Math.floor(weight)
+        }
     }
 
     const responsive = {
@@ -113,6 +146,13 @@ export default function Adopt() {
                 {userAdoptions.map((adoption, index) => {
                     return (
                         <div className="userAdoption" key={index}>
+                            {/* <ImageHelper 
+                                lastTimeFed={adoption.last_time_fed}
+                                noOfTimesFed={adoption.total_times_fed} 
+                                /> */}
+                            <div className="image">
+                                <img style={{width: imageSize(adoption.last_time_fed, adoption.total_times_fed)}} src={adoption.animal == "cat" ? Cat : Dog} alt=""/>
+                            </div>
                             <h3>{adoption.name}</h3>
                             <p>Type: {adoption.animal}</p>
                             <p>Parent: {adoption.parent}</p>
@@ -120,7 +160,9 @@ export default function Adopt() {
                             <button onClick={() => {
                                 feedAnimal(adoption.id)
                             }}>Feed Animal</button>
-                            <button>Mint NFT</button>
+                            <button onClick={() => {
+                                mint_nft(adoption.id)
+                            }}>Mint NFT</button>
                         </div>
                     )
                 })}
