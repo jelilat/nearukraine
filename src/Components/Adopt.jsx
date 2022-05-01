@@ -88,12 +88,19 @@ export default function Adopt() {
         
     }
 
-    const mint_nft = async (id) => {
+    const mint_nft = async (id, nft_status) => {
         setLoading(true);
         if (!window.walletConnection.isSignedIn()) {
             alert('You must be signed in to create a campaign');
             return;
         }
+
+        if (nft_status) {
+            alert("Already minted NFT")
+            setLoading(false);
+            return;
+        }
+
         const token_id = id - 1;
 
         await window.contract.nft_mint({
@@ -162,7 +169,7 @@ export default function Adopt() {
                                 feedAnimal(adoption.id)
                             }}>Feed Animal</button>
                             <button onClick={() => {
-                                mint_nft(adoption.id)
+                                mint_nft(adoption.id, adoption.minted_nft)
                             }}>Mint NFT</button>
                         </div>
                     )
