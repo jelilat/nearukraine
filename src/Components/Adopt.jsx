@@ -53,11 +53,13 @@ export default function Adopt() {
         setLoading(true);
         if (!window.walletConnection.isSignedIn()) {
             alert('You must be signed in to create a campaign');
+            setLoading(false)
             return;
         }
         
         if (description.name === '' || description.animal === '') {
             alert('Please fill out all fields');
+            setLoading(false)
             return;
         } 
 
@@ -75,6 +77,7 @@ export default function Adopt() {
         setLoading(true);
         if (!window.walletConnection.isSignedIn()) {
             alert('You must be signed in to create a campaign');
+            setLoading(false)
             return;
         }
         console.log(id)
