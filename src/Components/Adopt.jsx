@@ -83,7 +83,7 @@ export default function Adopt() {
         console.log(id)
 
         await window.contract.feed_pet({
-            id: id - 1,
+            id: id,
         },
         300000000000000, //gas estimate
         ONE_NEAR, //adoption fee
@@ -107,8 +107,8 @@ export default function Adopt() {
         const token_id = id - 1;
 
         await window.contract.nft_mint({
-            token_id: token_id.toString(),
-            u_token_id: token_id,
+            token_id: id.toString(),
+            u_token_id: id,
             receiver_id: window.accountId,
         },
         300000000000000, //gas estimate
