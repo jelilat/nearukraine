@@ -147,7 +147,7 @@ export default function Adopt() {
 
     return(
         <div>
-            <div className="userAdoptions">
+            <div className="userAdoptions" id="feed">
             <h1 style={{textAlign: 'center'}}>Your Animals</h1>
             {loading && <BallTriangle color="#1e8bb8" loading={loading} /> }
             {userAdoptions.length > 0 ? <Carousel responsive={responsive}>
@@ -181,7 +181,7 @@ export default function Adopt() {
                 : <p style={{textAlign: 'center', color: 'red'}}>Sign in to see your adopted animals</p>}
               </div>}
             </div>
-            <div className="adopt">
+            <div className="adopt" id="adopt">
                 <h1 style={{textAlign: 'center'}}>Adopt Animal</h1>
                 <div>
                     <label>Name your pet</label><br />

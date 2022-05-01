@@ -20,8 +20,8 @@ export default function App() {
             <span style={{color:"#1e8bb8"}}>Adopt</span> animals from Ukranian zoos.
           </h1>
           <p>Ukrainian zoos are in severe need of help now and will be in need after the war ends.</p>
-          <a href="#projects"><button>Adopt an animal</button></a>
-          <a href="#create-campaign"><button>Feed an animal</button></a>
+          <a href="#adopt"><button>Adopt an animal</button></a>
+          <a href="#feed"><button>Feed an animal</button></a>
         </div>
         <img src={hero} alt="hero" />
       </div>
