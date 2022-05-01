@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/Users/jelilat/codes/nearukraine/contract/target/rls/debug/build/typenum-21c79e155ca7121a/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/Users/jelilat/codes/nearukraine/contract/target/rls/debug/build/typenum-21c79e155ca7121a/out/op.rs

@@ -20,7 +20,7 @@ impl Adoption {
     pub fn new(id: i32, name: String, animal: String) -> Self {
         Adoption {
             id,
-            parent: env::signer_account_id(),
+            parent: env::signer_account_id().to_string(),
             name,
             animal,
             last_time_fed: env::block_timestamp(),
