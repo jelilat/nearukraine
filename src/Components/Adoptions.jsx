@@ -65,7 +65,7 @@ function Adoptions() {
                     return (
                         <div className="alluserAdoption" key={index}>
                             <div className="image">
-                                <img style={{width: imageSize(adoption.last_time_fed, adoption.total_times_fed)}} src={adoption.animal == "cat" ? Cat : Dog} alt=""/>
+                                <img style={{width: 300}} src={adoption.animal == "cat" ? Cat : Dog} alt=""/>
                             </div>
                             <h3>{adoption.name}</h3>
                             <p>Type: {adoption.animal}</p>
