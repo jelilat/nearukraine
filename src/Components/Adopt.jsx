@@ -119,11 +119,11 @@ export default function Adopt() {
 
     const imageSize = (lastTimeFed, noOfTimesFed) => {
         const timeDifference = Date.now() - (lastTimeFed/1000000)
-        const day = (timeDifference/1000)/86400
-        const weight = 10 * noOfTimesFed/day
-        console.log(weight)
-        if (weight > 300) {
-            return 300
+        let day = (timeDifference/1000)/86400
+        if (day < 1) {day = 1}
+        const weight = noOfTimesFed/day
+        if (weight >= 100) {
+            return 100
         } else {
             return Math.floor(weight)
         }
@@ -167,7 +167,9 @@ export default function Adopt() {
                             <h3>{adoption.name}</h3>
                             <p>Type: {adoption.animal}</p>
                             <p>Parent: {adoption.parent}</p>
+                            <p>Times fed: {adoption.total_times_fed}</p>
                             <p>Last fed: {timeAgo(adoption.last_time_fed)}</p>
+                            <p>Health: {imageSize(adoption.last_time_fed, adoption.total_times_fed)}</p>
                             <button onClick={() => {
                                 feedAnimal(adoption.id)
                             }}>Feed Animal</button>
@@ -187,7 +189,7 @@ export default function Adopt() {
             <div className="adopt" id="adopt">
                 <h1 style={{textAlign: 'center'}}>Adopt Animal</h1>
                 <div>
-                    <label>Name your pet</label><br />
+                    <label>Name your animal</label><br />
                     <input type="text" name="title" placeholder="e.g. Qeuw" id="title" onChange={updateDescription} /> <br />
                     <label>Select Animal</label><br />
                     <select name="animal" id="animal" onChange={updateDescription}>

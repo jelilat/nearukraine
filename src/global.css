@@ -113,4 +113,8 @@ footer {
     font-size: 1em;
     padding-top: 70px;
   }
+
+  .faq {
+    width: 90%;
+  }
 }

@@ -45,11 +45,11 @@ function Adoptions() {
 
       const imageSize = (lastTimeFed, noOfTimesFed) => {
         const timeDifference = Date.now() - (lastTimeFed/1000000)
-        const day = (timeDifference/1000)/86400
-        const weight = 10 * noOfTimesFed/day
-        console.log(weight)
-        if (weight > 300) {
-            return 300
+        let day = (timeDifference/1000)/86400
+        if (day < 1) {day = 1}
+        const weight = noOfTimesFed/day
+        if (weight >= 100) {
+            return 100
         } else {
             return Math.floor(weight)
         }
@@ -70,6 +70,7 @@ function Adoptions() {
                             <h3>{adoption.name}</h3>
                             <p>Type: {adoption.animal}</p>
                             <p>Parent: {adoption.parent}</p>
+                            <p>Health: {imageSize(adoption.last_time_fed, adoption.total_times_fed)}</p>
                         </div>
                     )
                 })}

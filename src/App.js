@@ -41,7 +41,9 @@ export default function App() {
         <h4>What is the cost of feeding an animal?</h4>
         <p>The cost of feeding an animal is 1 NEAR.</p>
         <h4>Why do I have to pay to adopt an animal?</h4>
-        <p>The adoption fee is used in the maintenance of the zoo an dthe welfare of the animals.</p>
+        <p>The adoption fee is used in the maintenance of the zoo and the welfare of the animals.</p>
+        <h4>How is my animal's health calculated?</h4>
+        <p>The health is calculated by dividing number of times fed by the last time fed. The more you feed the animal, the higher its health.</p>
       </div>
      <footer>
        <p>Created with ❤️ by <a href="https://www.twitter.com/tjelailah">@tjelailah</a>.</p>
